@@ -16,7 +16,13 @@ const accuracyPercentText = document.getElementById("accuracy-percent");
 const progressBar = document.getElementById("progress-bar");
 const progressText = document.getElementById("progress-text");
 const progressPercentage = document.getElementById("progress-percentage");
-const customPhrase = "tapez ici pour savoir combien de mots par minute vous pouvez taper";
+
+const difficultyPhrases = {
+    easy: "tapez ici pour savoir combien de mots par minute vous pouvez taper",
+    medium: "l informatique et la dactylographie demandent de la vitesse et une grande précision au clavier",
+    hard: "l environnement de développement exige la configuration simultanée de caractères spéciaux comme { & ou # !"
+};
+
 const startTest = () => {
     wordsToType.length = 0;
     wordDisplay.innerHTML = "";
@@ -25,7 +31,12 @@ const startTest = () => {
     totalTypedCharacters = 0;
     totalCorrectCharacters = 0;
 
-    customPhrase.split(" ").forEach(word => {
+    inputField.disabled = false;
+
+    const selectedLevel = modeSelect.value || "easy";
+    const currentPhrase = difficultyPhrases[selectedLevel];
+
+    currentPhrase.split(" ").forEach(word => {
         wordsToType.push(word);
     });
 
@@ -33,6 +44,7 @@ const startTest = () => {
         const span = document.createElement("span");
         span.textContent = word + " ";
         span.className = "text-slate-400 transition-colors duration-150 rounded px-1";
+        
         if (index === 0) {
             span.className = "text-blue-600 font-bold bg-blue-50 dark:bg-slate-800 border-b-2 border-blue-500 rounded px-1";
         }
@@ -42,10 +54,6 @@ const startTest = () => {
     inputField.value = "";
     updateStatsUI(0, 100);
 };
-
-document.addEventListener("click", () => {
-    inputField.focus();
-});
 
 const updateStatsUI = (wpm, accuracy) => {
     wpmValue.textContent = Math.round(wpm);
@@ -59,11 +67,12 @@ const updateStatsUI = (wpm, accuracy) => {
     const accuracyDashArray = `${accuracy}, 100`;
     accuracyCircle.setAttribute("stroke-dasharray", accuracyDashArray);
 
-    const overallProgress = (currentWordIndex / wordsToType.length) * 100;
+    const overallProgress = wordsToType.length > 0 ? (currentWordIndex / wordsToType.length) * 100 : 0;
     progressBar.style.width = `${overallProgress}%`;
     progressText.textContent = `Word ${currentWordIndex}/${wordsToType.length}`;
     progressPercentage.textContent = `${Math.round(overallProgress)}%`;
 };
+
 
 const handleInput = (event) => {
     if (!startTime) startTime = Date.now();
@@ -71,6 +80,8 @@ const handleInput = (event) => {
     const currentWord = wordsToType[currentWordIndex];
     const typedValue = inputField.value;
     const targetSpan = wordDisplay.children[currentWordIndex];
+
+    if (!targetSpan) return;
 
     let isCorrectSoFar = true;
     for (let i = 0; i < typedValue.length; i++) {
@@ -147,12 +158,44 @@ const checkWordSubmission = (event) => {
     }
 };
 
+
+const changeDifficulty = (level) => {
+    modeSelect.value = level;
+
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'dark:bg-slate-700', 'text-blue-600', 'dark:text-white', 'shadow-sm', 'font-bold');
+        btn.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
+    });
+
+    const activeBtn = document.getElementById(`btn-${level}`);
+    if (activeBtn) {
+        activeBtn.classList.remove('text-slate-500', 'dark:text-slate-400', 'font-medium');
+        activeBtn.classList.add('bg-white', 'dark:bg-slate-700', 'text-blue-600', 'dark:text-white', 'shadow-sm', 'font-bold');
+    }
+
+    modeSelect.dispatchEvent(new Event('change'));
+};
+
+
+document.addEventListener("click", () => {
+    if (!inputField.disabled) {
+        inputField.focus();
+    }
+});
+
 inputField.addEventListener("input", handleInput);
 inputField.addEventListener("keydown", checkWordSubmission);
+
 modeSelect.addEventListener("change", () => startTest());
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
+document.querySelectorAll('.diff-btn').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+        const level = event.currentTarget.id.replace('btn-', '');
+        changeDifficulty(level);
+    });
+});
 
+document.getElementById('theme-toggle').addEventListener('click', () => {
     document.documentElement.classList.toggle('dark');
 });
 
