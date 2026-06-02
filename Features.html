@@ -1,108 +1,155 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./output.css">
-    <title>Accueil</title>
+    <title>Vanilla Typing Game</title>
 </head>
 
-<body>
-    <nav class="w-full bg-blue-900 text-gray-300 h-20 flex justify-between items-center px-6 py-4 shadow-md">
-        <h2 class="text-3xl md:text-4xl font-bold">Vanilla Typing Game</h2>
-        <ul class="flex gap-8 text-lg md:text-2xl items-center font-medium">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#0f172a] dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <nav
+        class="w-full bg-white dark:bg-[#1e293b] border-b border-slate-200 dark:border-slate-700 shadow-lg h-20 flex justify-between items-center px-8 transition-colors duration-300">
+
+        <h2 class="text-3xl font-bold text-blue-600 dark:text-white">
+            Vanilla Typing Game
+        </h2>
+
+        <ul class="flex gap-8 text-lg items-center text-slate-600 dark:text-slate-300">
             <li>
-                <a href="" class="hover:text-gray-200 transition-colors">Home</a>
+                <a href="#" class="hover:text-blue-600 dark:hover:text-white transition">Home</a>
             </li>
             <li>
-                <a href="#features" class="hover:text-gray-200 transition-colors">Features</a>
+                <a href="#features" class="hover:text-blue-600 dark:hover:text-white transition">Features</a>
             </li>
             <li class="flex items-center gap-2">
-                <a href="" class="hover:text-gray-200 transition-colors">Account</a>
-                <img class="w-11 caret-gray-300" src="image/logo/circle-user-regular.png" alt="">
+                <a href="#" class="hover:text-blue-600 dark:hover:text-white transition">Account</a>
+                <img src="image/logo/circle-user-regular.png" alt="Account" class="w-8">
+            </li>
+            <li class="ml-4">
+                <button id="theme-toggle"
+                    class="flex items-center gap-3 font-bold text-sm tracking-widest hover:opacity-80 transition-opacity focus:outline-none">
+
+                    <span class="text-blue-600 dark:text-slate-500 transition-colors duration-300">LIGHT</span>
+
+                    <span class="text-slate-300 dark:text-slate-700">/</span>
+
+                    <span class="text-slate-400 dark:text-blue-500 transition-colors duration-300">DARK</span>
+
+                </button>
             </li>
         </ul>
     </nav>
-    <section class="flex flex-col md:flex-row items-center justify-between min-h-screen bg-gray-900 text-white px-10">
-        <div class="md:w-1/2 space-y-6">
-            <h1 class="text-5xl font-extrabold text-blue-400">WELCOME TO VANILLA TYPING.</h1>
-            <p class="text-3xl">Type faster, smarter, and with more confidence. Vanilla Typing is designed to help you
-                sharpen your skills, track your progress, and enjoy the process of learning.</p>
-            <p class="text-2xl text-gray-300">Discover a modern typing experience that combines style with performance.
-                Push your limits,
-                celebrate your milestones, and transform the way you interact with your keyboard.</p>
-            <button
-                class="mt-6 px-6 py-3 bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-indigo-600 rounded-lg text-3xl w-52 font-semibold 
-         transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:-translate-y-1 hover:text-yellow-200">
-                <a href="index.html">Get Started</a>
-            </button>
-            <button
-                class=" ml-5 mt-6 px-6 py-3 bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-indigo-600 rounded-lg text-3xl font-semibold transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:-translate-y-1 hover:text-yellow-200">
-                Create Account
-            </button>
+
+    <section class="min-h-screen flex flex-col lg:flex-row items-center justify-between px-10 lg:px-20 py-20">
+        <div class="lg:w-1/2">
+            <span
+                class="bg-blue-100 text-blue-700 dark:bg-blue-600 dark:text-white px-4 py-2 rounded-full text-sm font-semibold">
+                Improve Your Typing Skills
+            </span>
+
+            <h1 class="text-6xl lg:text-7xl font-extrabold mt-6 leading-tight text-slate-900 dark:text-slate-100">
+                Master Your <span class="text-blue-600 dark:text-blue-500">Typing Speed</span>
+            </h1>
+
+            <p class="text-xl text-slate-600 dark:text-slate-300 mt-8 leading-relaxed max-w-xl">
+                Challenge yourself with real-time typing tests, track your statistics, improve your accuracy, and become
+                faster every day.
+            </p>
+
+            <p class="text-lg text-slate-500 dark:text-slate-400 mt-4 max-w-xl">
+                Vanilla Typing combines a modern interface, detailed performance tracking and progressive learning to
+                help you reach your goals.
+            </p>
+
+            <div class="flex gap-4 mt-10">
+                <a href="index.html"
+                    class="px-8 py-4 bg-blue-600 text-white hover:bg-blue-500 rounded-xl font-bold shadow-lg transition hover:scale-105">
+                    Start Typing
+                </a>
+                <button
+                    class="px-8 py-4 bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white hover:bg-slate-300 dark:hover:bg-slate-600 rounded-xl font-bold shadow-lg transition hover:scale-105">
+                    Create Account
+                </button>
+            </div>
         </div>
-        <div class="md:w-1/2 flex justify-center mt-10 md:mt-0">
-            <img src="your-monitor-image.png" alt="Typing Monitor" class="w-96 rounded-lg shadow-lg">
+        <div class="lg:w-1/2 flex justify-center mt-16 lg:mt-0">
+            <div
+                class="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-2xl">
+                <img src="" alt="Typing Game" class="w-2xl h-96 rounded-xl bg-slate-100 dark:bg-slate-800">
+            </div>
         </div>
     </section>
 
-    <section id="features" class=" flex flex-col items-center min-h-screen bg-gray-50">
-        <h1 class="text-7xl font-bold py-8">Level up Your Typing Speed</h1>
-        <p class="text-5xl mt-1 mb-8">Discover the full functionality of Vanilla Typing Game:</p>
-        <div class="flex flex-wrap gap-15 mx-100 justify-center">
+    <section id="features" class="bg-slate-100 dark:bg-[#111827] py-24 px-8 transition-colors duration-300">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-bold text-slate-900 dark:text-slate-100">
+                Why Choose Vanilla Typing?
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-xl mt-4">
+                Everything you need to improve your typing performance.
+            </p>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
             <div
-                class="w-lg h-3/4 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div class="w-full h-80 bg-gray-100 flex items-center justify-center">
-                    <img src="your-image.png" alt="Typing Feature" class="h-full object-contain">
+                class="bg-white dark:bg-[#1e293b] rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg hover:scale-105 transition">
+                <div class="h-64 bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+                    <img src="" alt="Typing Speed" class="h-full object-contain">
                 </div>
-                <div class="p-6 text-center">
-                    <h3 class="text-3xl font-semibold text-gray-900 mb-2">Test Your Typing Speed</h3>
-                    <p class="text-gray-600 text-2xl leading-relaxed">
-                        Measure your typing speed instantly with a built-in test. Compare your results and see how fast
-                        you really are.
-                    </p>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white">Typing Speed Test</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Measure your Words Per Minute (WPM) and monitor your
+                        progress over time.</p>
                 </div>
             </div>
+
             <div
-                class="w-lg h-3/4 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div class="w-full h-80 bg-gray-100 flex items-center justify-center">
-                    <img src="your-image.png" alt="Typing Feature" class="h-full object-contain">
+                class="bg-white dark:bg-[#1e293b] rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg hover:scale-105 transition">
+                <div class="h-64 bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+                    <img src="" alt="Records" class="h-full object-contain">
                 </div>
-                <div class="p-6 text-center">
-                    <h3 class="text-3xl font-semibold text-gray-900 mb-2">Personal Records</h3>
-                    <p class="text-gray-600 text-2xl leading-relaxed">
-                        View your best scores and records anytime. Challenge yourself to beat your personal best.
-                    </p>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white">Personal Records</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Keep track of your best performances and challenge
+                        yourself to beat them.</p>
                 </div>
             </div>
+
             <div
-                class="w-lg h-3/4 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div class="w-full h-80 bg-gray-100 flex items-center justify-center">
-                    <img src="your-image.png" alt="Typing Feature" class="h-full object-contain">
+                class="bg-white dark:bg-[#1e293b] rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg hover:scale-105 transition">
+                <div class="h-64 bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+                    <img src="your-image.png" alt="Statistics" class="h-full object-contain">
                 </div>
-                <div class="p-6 text-center">
-                    <h3 class="text-3xl font-semibold text-gray-900 mb-2">Statistics Dashboard</h3>
-                    <p class="text-gray-600 text-2xl leading-relaxed">
-                        Track your performance with detailed stats: Words Per Minute (WPM), accuracy percentage, error
-                        count, and time spent.
-                    </p>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white">Statistics Dashboard</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Analyze your WPM, accuracy, mistakes and overall
+                        progression.</p>
                 </div>
             </div>
+
             <div
-                class="w-lg h-3/4 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div class="w-full h-80 bg-gray-100 flex items-center justify-center">
-                    <img src="your-image.png" alt="Typing Feature" class="h-full object-contain">
+                class="bg-white dark:bg-[#1e293b] rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg hover:scale-105 transition">
+                <div class="h-64 bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+                    <img src="" alt="Levels" class="h-full object-contain">
                 </div>
-                <div class="p-6 text-center">
-                    <h3 class="text-3xl font-semibold text-gray-900 mb-2">Levels & Progression</h3>
-                    <p class="text-gray-600 text-2xl leading-relaxed">
-                        Start with 3 levels of increasing difficulty — Beginner, Intermediate, and Advanced — to
-                        steadily improve your typing skills.
-                    </p>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white">Levels & Progression</h3>
+                    <p class="text-slate-600 dark:text-slate-400">Progress through multiple difficulty levels and
+                        continuously improve.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <footer
+        class="bg-slate-50 dark:bg-[#0f172a] border-t border-slate-200 dark:border-slate-700 py-6 text-center text-slate-500 dark:text-slate-500 transition-colors duration-300">
+        © 2026 Vanilla Typing Game — Improve your speed.
+    </footer>
+
+    <script src="Features.js"></script>
 </body>
 
 </html>
