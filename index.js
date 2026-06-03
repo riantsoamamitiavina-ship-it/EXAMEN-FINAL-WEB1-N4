@@ -19,9 +19,47 @@ const progressText = document.getElementById("progress-text");
 const progressPercentage = document.getElementById("progress-percentage");
 
 const difficultyPhrases = {
-    easy: "tapez ici pour savoir combien de mots par minute vous pouvez taper",
-    medium: "l informatique et la dactylographie demandent de la vitesse et une grande précision au clavier",
-    hard: "l environnement de développement exige la configuration simultanée de caractères spéciaux comme { & ou # !"
+    easy: [
+        "tapez ici pour savoir combien de mots par minute vous pouvez taper",
+        "le soleil brille aujourd hui dans un ciel parfaitement dégagé",
+        "les enfants jouent tranquillement dans le jardin de la maison",
+        "une promenade matinale permet de commencer la journée sereinement",
+        "la lecture régulière améliore le vocabulaire et la compréhension",
+        "les oiseaux chantent doucement au lever du jour",
+        "un bon café accompagne souvent les premières heures du matin",
+        "la pratique quotidienne aide à progresser rapidement",
+        "le chat dort paisiblement près de la fenêtre ouverte",
+        "chaque effort constant produit des résultats visibles",
+        "apprendre de nouvelles compétences demande du temps et de la patience"
+    ],
+
+    medium: [
+        "l informatique et la dactylographie demandent de la vitesse et une grande précision au clavier",
+        "la programmation moderne nécessite une compréhension approfondie des algorithmes",
+        "les développeurs utilisent différents outils pour améliorer leur productivité",
+        "la maîtrise du clavier réduit considérablement le temps de saisie",
+        "les réseaux informatiques permettent l échange rapide des informations",
+        "une bonne organisation facilite la gestion des projets complexes",
+        "les systèmes numériques évoluent constamment avec les nouvelles technologies",
+        "la sécurité des données constitue une priorité pour les entreprises",
+        "les utilisateurs apprécient les applications simples et efficaces",
+        "la collaboration entre équipes améliore la qualité du développement",
+        "les tests réguliers permettent de détecter rapidement les erreurs"
+    ],
+
+    hard: [
+        "l environnement de développement exige la configuration simultanée de caractères spéciaux comme { & ou # !",
+        "la commande javascript utilise fréquemment des symboles tels que () {} [] et ; dans le code",
+        "les expressions régulières peuvent contenir des caractères complexes comme ^ $ * + ? et |",
+        "un mot de passe robuste combine lettres chiffres et symboles comme @ # % & !",
+        "la configuration réseau nécessite parfois des adresses du type 192.168.1.1 ou 10.0.0.1",
+        "les développeurs manipulent souvent des chaînes contenant des guillemets simples et doubles",
+        "une fonction avancée peut inclure des paramètres entre parenthèses ainsi que des accolades",
+        "les fichiers de configuration utilisent fréquemment les signes = : / et \\",
+        "la syntaxe moderne repose sur des structures complexes incluant < > { } et [ ]",
+        "certaines commandes système combinent plusieurs options comme -a -l ou --verbose",
+        "la gestion des erreurs implique parfois l utilisation de try catch et des symboles spécifiques"
+    ]
 };
 
 const startTest = () => {
@@ -34,8 +72,11 @@ const startTest = () => {
 
     inputField.disabled = false;
 
-    const selectedLevel = modeSelect.value || "easy";
-    const currentPhrase = difficultyPhrases[selectedLevel];
+   const selectedLevel = modeSelect.value || "easy";
+
+const phrases = difficultyPhrases[selectedLevel];
+const randomIndex = Math.floor(Math.random() * phrases.length);
+const currentPhrase = phrases[randomIndex];
 
     currentPhrase.split(" ").forEach(word => {
         wordsToType.push(word);
