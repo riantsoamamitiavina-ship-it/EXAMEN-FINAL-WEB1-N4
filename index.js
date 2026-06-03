@@ -187,6 +187,11 @@ const calculateLiveStats = () => {
 };
 
 const checkWordSubmission = (event) => {
+    if (event.key === "Enter" && inputField.disabled) {
+    startTest();
+    return;
+    
+}
     let pressedKey = event.key.toLowerCase();
     if (event.key === "Backspace") pressedKey = "backspace";
     if (event.key === "Enter") pressedKey = "enter";
@@ -231,7 +236,7 @@ const checkWordSubmission = (event) => {
             } else {
                 inputField.disabled = true;
                 progressBar.style.width = "100%";
-                progressText.textContent = "Terminé !";
+                progressText.textContent = "Terminé ! cliquez sur ↻ pour recommencer";
                 progressPercentage.textContent = "100%";
                 return;
             }
@@ -241,6 +246,7 @@ const checkWordSubmission = (event) => {
             event.preventDefault();
         }
     }
+
 };
 
 const changeDifficulty = (level) => {
@@ -280,3 +286,4 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 });
 
 startTest();
+document.getElementById("restart-btn").addEventListener("click", startTest);
