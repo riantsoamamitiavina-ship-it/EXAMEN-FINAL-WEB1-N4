@@ -4,6 +4,7 @@ let totalTypedCharacters = 0;
 let totalCorrectCharacters = 0;
 
 const wordsToType = [];
+
 const modeSelect = document.getElementById("mode");
 const wordDisplay = document.getElementById("word-display");
 const inputField = document.getElementById("input-field");
@@ -41,15 +42,30 @@ const startTest = () => {
     });
 
     wordsToType.forEach((word, index) => {
-        const span = document.createElement("span");
-        span.textContent = word + " ";
-        span.className = "text-slate-400 transition-colors duration-150 rounded px-1";
+        const wordSpan = document.createElement("span");
+        wordSpan.className = "word inline-block mx-1 my-1 px-1 py-0.5 transition-all duration-150 border-b-2 border-transparent";
         
         if (index === 0) {
-            span.className = "text-blue-600 font-bold bg-blue-50 dark:bg-slate-800 border-b-2 border-blue-500 rounded px-1";
+            wordSpan.classList.remove("border-transparent");
+            wordSpan.classList.add("border-blue-500", "dark:border-blue-400");
         }
-        wordDisplay.appendChild(span);
+
+        word.split("").forEach(char => {
+            const charSpan = document.createElement("span");
+            charSpan.textContent = char;
+            charSpan.className = "text-slate-400 transition-colors duration-100";
+            wordSpan.appendChild(charSpan);
+        });
+
+        const spaceSpan = document.createElement("span");
+        spaceSpan.textContent = " ";
+        spaceSpan.className = "text-slate-400/50";
+        wordSpan.appendChild(spaceSpan);
+
+        wordDisplay.appendChild(wordSpan);
     });
+
+    wordDisplay.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
     inputField.value = "";
     updateStatsUI(0, 100);
@@ -73,33 +89,45 @@ const updateStatsUI = (wpm, accuracy) => {
     progressPercentage.textContent = `${Math.round(overallProgress)}%`;
 };
 
-
 const handleInput = (event) => {
     if (!startTime) startTime = Date.now();
 
     const currentWord = wordsToType[currentWordIndex];
     const typedValue = inputField.value;
-    const targetSpan = wordDisplay.children[currentWordIndex];
+    const wordSpan = wordDisplay.children[currentWordIndex];
 
-    if (!targetSpan) return;
+    if (!wordSpan) return;
 
-    let isCorrectSoFar = true;
-    for (let i = 0; i < typedValue.length; i++) {
-        if (typedValue[i] !== currentWord[i]) {
-            isCorrectSoFar = false;
-            break;
+    const charSpans = wordSpan.children;
+
+    for (let i = 0; i < currentWord.length; i++) {
+        const charSpan = charSpans[i];
+        if (!charSpan) continue;
+
+        if (i < typedValue.length) {
+            if (typedValue[i] === currentWord[i]) {
+                charSpan.className = "text-blue-600 dark:text-blue-400 font-semibold";
+            } else {
+                charSpan.className = "text-red-600 dark:text-red-400 font-semibold bg-red-100 dark:bg-red-950/40 rounded-sm";
+            }
+        } else {
+            charSpan.className = "text-slate-400";
         }
     }
 
-    if (isCorrectSoFar) {
-        targetSpan.className = "text-blue-600 bg-blue-50 dark:bg-slate-800 font-semibold border-b-2 border-blue-400 px-1";
-    } else {
-        targetSpan.className = "text-red-600 bg-red-100 dark:bg-red-950/50 font-semibold border-b-2 border-red-400 px-1";
+    const trailingSpaceSpan = charSpans[currentWord.length];
+    if (trailingSpaceSpan) {
+        if (typedValue.length > currentWord.length) {
+            trailingSpaceSpan.className = "text-red-600 bg-red-100 dark:bg-red-950/40 font-bold";
+        } else {
+            trailingSpaceSpan.className = "text-slate-400/50";
+        }
     }
 
     if (event.data) {
         totalTypedCharacters++;
-        if (event.data === currentWord[typedValue.length - 1]) {
+        const currentTypedIndex = typedValue.length - 1;
+        if (currentTypedIndex < currentWord.length && event.data === currentWord[currentTypedIndex]) {
             totalCorrectCharacters++;
         }
         calculateLiveStats();
@@ -138,11 +166,27 @@ const checkWordSubmission = (event) => {
             totalTypedCharacters++;
             totalCorrectCharacters++;
 
-            wordDisplay.children[currentWordIndex].className = "text-emerald-600 dark:text-emerald-400 font-medium px-1";
+            const currentWordSpan = wordDisplay.children[currentWordIndex];
+            
+            currentWordSpan.classList.remove("border-blue-500", "dark:border-blue-400");
+            currentWordSpan.classList.add("border-transparent");
+            Array.from(currentWordSpan.children).forEach(child => {
+                child.className = "text-emerald-600 dark:text-emerald-400 font-medium";
+            });
+
             currentWordIndex++;
 
             if (currentWordIndex < wordsToType.length) {
-                wordDisplay.children[currentWordIndex].className = "text-blue-600 font-bold bg-blue-50 dark:bg-slate-800 border-b-2 border-blue-500 rounded px-1";
+                const nextWordSpan = wordDisplay.children[currentWordIndex];
+                nextWordSpan.classList.remove("border-transparent");
+                nextWordSpan.classList.add("border-blue-500", "dark:border-blue-400");
+                
+                nextWordSpan.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center"
+                });
+
             } else {
                 inputField.disabled = true;
                 progressBar.style.width = "100%";
@@ -157,7 +201,6 @@ const checkWordSubmission = (event) => {
         }
     }
 };
-
 
 const changeDifficulty = (level) => {
     modeSelect.value = level;
@@ -176,16 +219,12 @@ const changeDifficulty = (level) => {
     modeSelect.dispatchEvent(new Event('change'));
 };
 
-
 document.addEventListener("click", () => {
-    if (!inputField.disabled) {
-        inputField.focus();
-    }
+    if (!inputField.disabled) inputField.focus();
 });
 
 inputField.addEventListener("input", handleInput);
 inputField.addEventListener("keydown", checkWordSubmission);
-
 modeSelect.addEventListener("change", () => startTest());
 
 document.querySelectorAll('.diff-btn').forEach(btn => {
