@@ -20,45 +20,25 @@ const progressPercentage = document.getElementById("progress-percentage");
 
 const difficultyPhrases = {
     easy: [
-        "tapez ici pour savoir combien de mots par minute vous pouvez taper",
-        "le soleil brille aujourd hui dans un ciel parfaitement dégagé",
-        "les enfants jouent tranquillement dans le jardin de la maison",
-        "une promenade matinale permet de commencer la journée sereinement",
-        "la lecture régulière améliore le vocabulaire et la compréhension",
-        "les oiseaux chantent doucement au lever du jour",
-        "un bon café accompagne souvent les premières heures du matin",
-        "la pratique quotidienne aide à progresser rapidement",
-        "le chat dort paisiblement près de la fenêtre ouverte",
-        "chaque effort constant produit des résultats visibles",
-        "apprendre de nouvelles compétences demande du temps et de la patience"
+        "type right here to find out exactly how many words per minute you can comfortably manage when typing on this keyboard the bright yellow sun is shining incredibly beautifully down from a completely clear and wide blue sky today afternoon",
+        "several happy children are playing quietly together on the green grass in the lovely backyard of their old family house taking a peaceful morning walk is a truly wonderful way to start your busy day with a fresh mind and positive energy",
+        "reading interesting books on a regular basis will naturally improve your vocabulary and overall reading comprehension skills over time beautiful wild birds are singing sweet melodies very softly just outside my bedroom window as the early morning dawn begins to break",
+        "a freshly brewed hot cup of delicious coffee or warm tea usually accompanies the very first productive hours of a working day practicing your typing skills every single day with consistency is guaranteed to help you make rapid and noticeable progress the fluffy little cat is sleeping completely peacefully on the warm rug right next to the large open living room window",
+        "every single bit of honest and constant effort you put into your work will eventually produce highly visible and rewarding results learning challenging new digital skills always requires a significant amount of your personal time, dedicated focus, and endless patience"
     ],
 
     medium: [
-        "l informatique et la dactylographie demandent de la vitesse et une grande précision au clavier",
-        "la programmation moderne nécessite une compréhension approfondie des algorithmes",
-        "les développeurs utilisent différents outils pour améliorer leur productivité",
-        "la maîtrise du clavier réduit considérablement le temps de saisie",
-        "les réseaux informatiques permettent l échange rapide des informations",
-        "une bonne organisation facilite la gestion des projets complexes",
-        "les systèmes numériques évoluent constamment avec les nouvelles technologies",
-        "la sécurité des données constitue une priorité pour les entreprises",
-        "les utilisateurs apprécient les applications simples et efficaces",
-        "la collaboration entre équipes améliore la qualité du développement",
-        "les tests réguliers permettent de détecter rapidement les erreurs"
+        "computer science and touch typing require a great balance of raw speed and precise accuracy across the entire standard keyboard layout modern software engineering and application programming require a deep, thorough understanding of highly complex algorithmic logic professional software developers constantly use a wide variety of advanced digital tools to maximize their daily workflow and productivity",
+        "mastering proper fluid touch typing techniques will significantly reduce the total amount of time you spend on manual data entry tasks global computer networks allow for an incredibly rapid and completely seamless exchange of critical information between cloud servers possessing excellent organizational skills makes it much easier to successfully manage large, complex software engineering projects",
+        "modern digital environments are constantly evolving alongside breakthrough technological developments and framework updates ensuring robust cyber data security has quickly become an absolute top priority for major contemporary international business operations everyday internet users highly appreciate desktop applications that feature a beautifully clean and efficient interface design",
+        "seamless communication and collaboration between remote teams drastically improves the final quality of the product development lifecycle running extensive automated tests allows engineering teams to easily detect and quickly resolve frustrating software bugs early"
     ],
 
     hard: [
-        "l environnement de développement exige la configuration simultanée de caractères spéciaux comme { & ou # !",
-        "la commande javascript utilise fréquemment des symboles tels que () {} [] et ; dans le code",
-        "les expressions régulières peuvent contenir des caractères complexes comme ^ $ * + ? et |",
-        "un mot de passe robuste combine lettres chiffres et symboles comme @ # % & !",
-        "la configuration réseau nécessite parfois des adresses du type 192.168.1.1 ou 10.0.0.1",
-        "les développeurs manipulent souvent des chaînes contenant des guillemets simples et doubles",
-        "une fonction avancée peut inclure des paramètres entre parenthèses ainsi que des accolades",
-        "les fichiers de configuration utilisent fréquemment les signes = : / et \\",
-        "la syntaxe moderne repose sur des structures complexes incluant < > { } et [ ]",
-        "certaines commandes système combinent plusieurs options comme -a -l ou --verbose",
-        "la gestion des erreurs implique parfois l utilisation de try catch et des symboles spécifiques"
+        "your local system development environment will frequently require configuring special characters like curly braces, ampersands, or hashtags advanced javascript functions and commands regularly utilize syntax symbols such as parentheses, brackets, and semicolons directly in code writing complex regular expressions for string matching often involves confusing characters like carets, dollar signs, asterisks, and pipes",
+        "creating a highly secure and robust user password combines lowercase and uppercase letters with special symbols like at signs and percentages basic local network engineering configurations sometimes require typing manual numerical IP addresses such as 192.168.1.1 or 10.0.0.1 with care experienced software engineers must frequently manipulate sensitive string variables containing complex single and double quotation marks",
+        "writing advanced mathematical formulas inside your code often requires deep nested loops alongside arithmetic symbols and equations standard software configuration files rely heavily on exact syntax formatting, including equals signs, colons, forward slashes, and backslashes modern programming language syntax heavily relies on complex nested array structures including less than, greater than, and question marks",
+        "executing terminal commands via the command line interface requires combining multiple strict flags and dashes like double hyphens implementing proper runtime error handling always involves the structured use of try catch blocks alongside underscore or tilde variables network engineering configurations sometimes require typing manual numerical IP addresses structures including less than"
     ]
 };
 
@@ -72,11 +52,11 @@ const startTest = () => {
 
     inputField.disabled = false;
 
-   const selectedLevel = modeSelect.value || "easy";
+    const selectedLevel = modeSelect.value || "easy";
 
-const phrases = difficultyPhrases[selectedLevel];
-const randomIndex = Math.floor(Math.random() * phrases.length);
-const currentPhrase = phrases[randomIndex];
+    const phrases = difficultyPhrases[selectedLevel];
+    const randomIndex = Math.floor(Math.random() * phrases.length);
+    const currentPhrase = phrases[randomIndex];
 
     currentPhrase.split(" ").forEach(word => {
         wordsToType.push(word);
@@ -85,7 +65,7 @@ const currentPhrase = phrases[randomIndex];
     wordsToType.forEach((word, index) => {
         const wordSpan = document.createElement("span");
         wordSpan.className = "word inline-block mx-1 my-1 px-1 py-0.5 transition-all duration-150 border-b-2 border-transparent";
-        
+
         if (index === 0) {
             wordSpan.classList.remove("border-transparent");
             wordSpan.classList.add("border-blue-500", "dark:border-blue-400");
@@ -188,10 +168,10 @@ const calculateLiveStats = () => {
 
 const checkWordSubmission = (event) => {
     if (event.key === "Enter" && inputField.disabled) {
-    startTest();
-    return;
-    
-}
+        startTest();
+        return;
+
+    }
     let pressedKey = event.key.toLowerCase();
     if (event.key === "Backspace") pressedKey = "backspace";
     if (event.key === "Enter") pressedKey = "enter";
@@ -213,7 +193,7 @@ const checkWordSubmission = (event) => {
             totalCorrectCharacters++;
 
             const currentWordSpan = wordDisplay.children[currentWordIndex];
-            
+
             currentWordSpan.classList.remove("border-blue-500", "dark:border-blue-400");
             currentWordSpan.classList.add("border-transparent");
             Array.from(currentWordSpan.children).forEach(child => {
@@ -226,7 +206,7 @@ const checkWordSubmission = (event) => {
                 const nextWordSpan = wordDisplay.children[currentWordIndex];
                 nextWordSpan.classList.remove("border-transparent");
                 nextWordSpan.classList.add("border-blue-500", "dark:border-blue-400");
-                
+
                 nextWordSpan.scrollIntoView({
                     behavior: "smooth",
                     block: "nearest",
